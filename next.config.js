@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-import basePath from "./basePath.json"
+const basePath = require("./basePath.json")
 const nextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
