@@ -5,10 +5,6 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import {JSONPath} from 'jsonpath-plus';
 import ReactMarkdown from 'react-markdown';
-// import Tex from '@matejmazur/react-katex'
-// import remarkMath from 'remark-math'
-// import rehypeKatex from 'rehype-katex'
-// import 'katex/dist/katex.min.css' //
 import Divider from '@mui/material/Divider';
 
 import { Skeleton } from '@mui/material';
@@ -27,14 +23,13 @@ import {
   motion
 } from 'framer-motion';
 
-import { selectSecret } from '@/store/secretState';
+import { updateCurrentPost } from '@/store/currentPostSlice'
 
-
-import { useState } from 'react';
-import { Close, UndoRounded } from '@mui/icons-material';
+import { Close } from '@mui/icons-material';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
+import { useDispatch } from 'react-redux';
 
 const PREFIX = 'PostPage';
 
@@ -45,10 +40,7 @@ const classes = {
   divider: `${PREFIX}-divider`,
   categoryName: `${PREFIX}-categoryName`,
   dateHolder: `${PREFIX}-dateHolder`,
-  dateStyle: `${PREFIX}-dateStyle`,
-  markdownHolder: `${PREFIX}-markdownHolder`,
   markdownImage: `${PREFIX}-markdownImage`,
-  loader: `${PREFIX}-loader`
 };
 
 const Root = styled('div')((
@@ -97,45 +89,12 @@ const Root = styled('div')((
     marginTop: theme.spacing(2)
   },
 
-  [`& .${classes.dateStyle}`]: {
-    fontWeight: theme.typography.fontWeightLight,
-    fontSize: theme.typography.pxToRem(13)
-  },
-
-  [`& .${classes.markdownHolder}`]: {
-    // overflow: 'scroll'
-    // padding: theme.spacing(2)
-  },
-
   [`& .${classes.markdownImage}`]: {
     maxWidth: '100%'
   },
 
-  [`& .${classes.loader}`]: {
-    alignSelf: 'center'
-  }
 }));
 
-
-const LoadingHeader = (postMetaData) => {
-
-
-  return(
-    <div>
-      <Typography className={classes.heading} variant="h2" component="h1">
-        {postMetaData.title}
-      </Typography>
-      <span className={classes.dateHolder}>
-        <Chip className={classes.categoryName} label={postMetaData.category} />
-        <Typography className={classes.dateStyle} variant="body2" component="p">
-          created on {postMetaData.created}
-        </Typography>
-      </span>
-      <Divider className={classes.divider} variant="middle" />
-    </div>
-  );
-
-}
 
 function PostContainer({ title, category, created, postText, description, lineage }) {
   function ImageRenderer(props) {
@@ -194,14 +153,13 @@ function PostContainer({ title, category, created, postText, description, lineag
             className={classes.paper} elevation={3}>
             <div>
               <Typography
-                className={classes.heading}
                 variant="h2"
                 component="h1">
                 {title}
               </Typography>
               <span className={classes.dateHolder}>
                 <Chip className={classes.categoryName} label={category} />
-                <Typography className={classes.dateStyle} variant="body2" component="p">
+                <Typography variant="body2" >
                   created on {created}
                 </Typography>
               </span>
@@ -227,7 +185,6 @@ function PostContainer({ title, category, created, postText, description, lineag
                 }}            
                 // remarkPlugins={[remarkMath]}
                 // rehypePlugins={[rehypeKatex]}
-                className={classes.markdownHolder} 
                 >
                 {postText}
               </ReactMarkdown>
@@ -241,6 +198,8 @@ function PostContainer({ title, category, created, postText, description, lineag
 function PostPage(props) {
   // Hooks
   const router = useRouter()
+
+  const dispatch = useDispatch();
   
   const { pid } = router.query;
   
@@ -264,7 +223,7 @@ function PostPage(props) {
   } else {
     const { posts } = blogPostsData
     let post = JSONPath({path: `$.[?(@.id === "${pid}")]`, json: posts})
-
+    dispatch(updateCurrentPost(pid))
     if (post.length == 0) {
       return renderSkeleton("Post not found, please drop me an email so I can have a look, Thank you 👻")
     }
@@ -286,10 +245,8 @@ export async function getStaticPaths() {
   }
 }
 
-// `getStaticPaths` requires using `getStaticProps`
 export async function getStaticProps(context) {
   return {
-    // Passed to the page component as props
     props: { },
   }
 }

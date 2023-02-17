@@ -6,129 +6,149 @@ export const config = {
 const gridInfo = { xs: 1, sm: 1, md: 3, lg: 3 }
 
 
-const TITLE = "Meetesh's Homepage 🏴‍☠️ 🏴‍☠️ 🏴‍☠️"
+const TITLE = "Interesting Projects 🏴‍☠️ 🏴‍☠️ 🏴‍☠️"
 const DESCRIPTION = "Hey there! I'm a research scholar @IIT Mandi working in the area of compilers."
 
 
 const content = [
   {
-    title: "This Blog",
-    links: undefined, 
-    index: undefined,
-    imageUri: undefined,
-    href: undefined,
-    id: undefined,
-    text: undefined,
-    textList: [
-      ["3rd Feb 2023", "Presented Synopsis Seminar"],
-      ["29th Nov 2022", "Presented Open Seminar"],
-      ["29th Oct 2022", "Submitted to OOPSLA 2023"],
-    ],
-    created: undefined
-  },
-  {
-    title: "Research Interests",
-    links: undefined, 
-    index: undefined,
-    imageUri: undefined,
-    href: undefined,
-    id: undefined,
-    text: "Compilers, JITs, Programming Languages, Security",
-    textList: undefined,
-    created: undefined
-  },
-  {
-    title: "Looking For",
-    links: undefined, 
-    index: undefined,
-    imageUri: undefined,
-    href: undefined,
-    id: undefined,
-    text: "Internship opportunities as a Researcher",
-    textList: undefined,
-    created: undefined
-  },
-  {
-    title: "Something About Me",
-    links: undefined, 
-    index: undefined,
-    imageUri: undefined,
-    href: undefined,
-    id: undefined,
-    text: "I absolutely love everything about computers and love to dive deeper into what makes them tick. I find myself comfortable in very high level abstractions like DSLs or React and also in low level things like code generation, assembly, C++.",
-    textList: undefined,
-    created: undefined
-  },
-  {
-    title: "Skills",
-    links: undefined, 
-    index: undefined,
-    imageUri: undefined,
-    href: undefined,
-    id: undefined,
-    text: "I find myself comfortable in",
-    textList: [
-      ["C, C++, Java", "Experience in large real world projects"],
-      ["React/Native, JS, R", "A lot of fun projects like this site. Worked on a JIT compiler for R called Rsh."],
-      ["Scripting", "Routinely use scripting languages like python, bash, JS, etc."],
-      ["Databases", "Am comfortable in mongo, SQL, etc."],
-      ["Teaching Assistant", "CS502 Compiler Design, C302 Paradigms of Programming"],
-    ],
-    created: undefined
-  },
-  {
-    title: "Quote",
-    links: undefined, 
-    index: undefined,
-    imageUri: undefined,
-    href: undefined,
-    id: undefined,
-    text: "Logic processed infinitely is emotion.",
-    textList: undefined,
-    created: undefined
-  },
-  {
-    title: "Interests",
-    links: undefined, 
-    index: undefined,
-    imageUri: undefined,
-    href: undefined,
-    id: undefined,
-    text: "I love to go out on long walks and hikes. You will find me listening to music or reading books/articles in my free time. I randomly start new personal projects like making a light controllers using arduino, setting up solar panels around the terrace and so on. If something piques my interest I will give it a shot.",
-    textList: undefined,
-    created: undefined
-  },
-  {
-    title: "Education",
-    links: undefined, 
-    index: undefined,
-    imageUri: undefined,
-    href: undefined,
-    id: undefined,
-    text: undefined,
-    textList: [
-      ["2020-2023: M.S (by Research) CSE", "IIT Mandi School of Computing and Electrical Engineering"],
-      ["2020: GATE CSE", "Cleared GATE examination."],
-      ["2016-2020: B.Tech CSE", "MRIIRS, NCR-Faridabad"],
-      ["2014-2016: High School", "Sri Gayatri Junior College, Hyderabad"],
-      ["2004-2014: Primary School", "Bharatiya Vidya Bhavans Public School, Hyderabad"],
-    ],
-    created: undefined
-  },
-  {
-    title: "Highlights",
+    title: "This Site Generator",
     links: [
-      ["https://www.cse.iitb.ac.in/~manas/","Dr. Manas Thakur"],
-      ["https://compl.iitmandi.ac.in/","CompL"],
+      ["https://github.com/meetesh06/easyNextBlog", "easyNextBlog"]
     ], 
     index: undefined,
     imageUri: undefined,
     href: undefined,
     id: undefined,
-    text: "Working with Dr. Manas Thakur and the CompL group has been the most rewarding and fulfilling part of my life :) I am proud of.",
+    text: "I was tired of plain looking slow websites/blogs, so decided to make something that is fast and modern.",
+    textList: [
+      ["React", ""],
+      ["NextJS", ""]
+    ],
+    created: undefined
+  },
+  {
+    title: "The XOPE Programming Language",
+    links: [
+      ["https://github.com/meetesh06/xope_4.2", "xope"]
+    ], 
+    index: undefined,
+    imageUri: undefined,
+    href: undefined,
+    id: undefined,
+    text: "This was part of my final year B. Tech project where the aim was to create a simple easy to use language. The entire parser/code generator is written 100% in C and produces x86_64 compatible assembly code.",
+    textList: [
+      ["C", ""],
+      ["X86_64 Assemble", ""],
+      ["NASM", ""],
+    ],
+    created: undefined
+  },
+  {
+    title: "MoodleMan",
+    links: [
+      ["https://github.com/meetesh06/MoodleMan", "MoodleMan"]
+    ], 
+    index: undefined,
+    imageUri: undefined,
+    href: undefined,
+    id: undefined,
+    text: "Simple utility written in python to manage moodle submissions, made it when I was a TA for the CS 502 (Compiler Design) course at IIT Mandi.",
+    textList: [
+      ["Python", ""],
+    ],
+    created: undefined
+  },
+  {
+    title: "Vasco points to debugger",
+    links: undefined, 
+    index: undefined,
+    imageUri: undefined,
+    href: undefined,
+    id: undefined,
+    text: "Made a debugger for the vasco framework to visualize the points to graph generation in Java programs, this was made as a mini project for the CS 611 (Program Analysis) course. The link is currently private, but should be able to share if interested.",
+    textList: [
+      ["Java, Jimple", ""],
+      ["React", ""]
+    ],
+    created: undefined
+  },
+  {
+    title: "React Native projects",
+    links: [
+      ["https://github.com/meetesh06/Ecommerce-React-Native-Sample-Application", "ecommerce"],
+      ["https://github.com/meetesh06/CampusStory", "CampusStory"],
+    ], 
+    index: undefined,
+    imageUri: undefined,
+    href: undefined,
+    id: undefined,
+    text: "Have made a lot of React Native apps. The interesting one is Campus Story which was made as an effort to improve the communication channel between institutions students.",
+    textList: [
+      ["React Native", ""],
+      ["ffmpeg", ""]
+    ],
+    created: undefined
+  },
+  {
+    title: "LLVM offline analysis framework",
+    links: undefined, 
+    index: undefined,
+    imageUri: undefined,
+    href: undefined,
+    id: undefined,
+    text: "This is part of my research tenure at IIT Mandi, I should update it and make it open source after all the formalities are completed. This is a framework that allows for offline analysis and processing of contextually specialized JIT binaries. This is all that can be put here currently ;)",
+    textList: [
+      ["C++", ""],
+      ["LLVM", ""]
+    ],
+    created: undefined
+  },
+  {
+    title: "Hackintosh",
+    links: [
+      ["https://github.com/meetesh06/Avita-Liber-v14-EFI", "avita"]
+    ], 
+    index: undefined,
+    imageUri: undefined,
+    href: undefined,
+    id: undefined,
+    text: "I love the idea of hacking software to run in places where its not supposed to :) I dabble in hackintosh from time to time and have some EFI configs for some laptops that I have handy.",
+    textList: [
+      ["ACPI (iASL)", ""]
+    ],
+    created: undefined
+  },
+  {
+    title: "ElasticSearch",
+    links: [
+      ["https://github.com/meetesh06/starter_project_es_node_react_mongodb", "starter"]
+    ], 
+    index: undefined,
+    imageUri: undefined,
+    href: undefined,
+    id: undefined,
+    text: "I was a intern for a short time for JPTokyo during my B Tech and made this starter template for a elastic search based project.",
+    textList: [
+      ["Elasticsearch", ""],
+      ["node", ""],
+      ["mongodb", ""],
+      ["React", ""],
+      
+    ],
+    created: undefined
+  },
+  {
+    title: "A Lot more",
+    links: undefined, 
+    index: undefined,
+    imageUri: undefined,
+    href: undefined,
+    id: undefined,
+    text: "I usually do a lot more things, especially in electronics that I don't put here. I am not really a electronics engineer but I like to get to the hardware whenever I get a chance.",
     textList: undefined,
     created: undefined
-  }
+  },
 ]
 
 

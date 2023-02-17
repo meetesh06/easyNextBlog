@@ -37,13 +37,13 @@ function Blog(props) {
   }
 
   // Hooks
-  let post = useSelector(selectCurrentPost);
-  useEffect(() => {
-    if (post) {
-      const element = document.getElementById(`post-${post.id}`);
-      element.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
-    }
-  }, [post]);
+  // let post = useSelector(selectCurrentPost);
+  // useEffect(() => {
+  //   if (post) {
+  //     const element = document.getElementById(`post-${post.id}`);
+  //     element.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
+  //   }
+  // }, [post]);
 
   const { posts } = blogPostsData;
 
@@ -68,7 +68,8 @@ function Blog(props) {
       >
         {
           posts.map((post, index) => (
-            <DisplayCard key={`post-${index}`} 
+            <DisplayCard 
+              key={`post-${index}`} 
               id={`post-${post.id}`}
               title={post.title} 
               text={post.description} 

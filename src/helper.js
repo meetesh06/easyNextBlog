@@ -4,7 +4,7 @@ return '/blog/' + id;
 }
 
 function sortPosts(a, b) {
-return new Date(b.created).getTime() - new Date(a.created).getTime();
+    return moment(b.created, 'DD-MM-YYYY').toDate() - moment(a.created, 'DD-MM-YYYY').toDate()
 }
 
 export { parsePostUrl, sortPosts }

@@ -5,8 +5,8 @@ import Head from 'next/head'
 import DisplayCard from './DisplayCard'
 import NavBar from './NavBar'
 import { Box, createTheme, CssBaseline, Grid, responsiveFontSizes, ScopedCssBaseline } from '@mui/material';
-import RightSidebar from './RightSidebar';
-
+import PostsYearly from './PostsYearly';
+import Lineage from './Lineage'
 import {
   leftSide
 } from '@/config'
@@ -18,6 +18,7 @@ function PageLayout(props) {
   const router = useRouter();
   const isMain = router.pathname === "/"
   const isBlog = router.pathname === "/blog"
+  const isPost = router.pathname === "/blog/[pid]"
 
   return(
     <React.Fragment>
@@ -26,9 +27,14 @@ function PageLayout(props) {
         <Grid container spacing={1}>
           <Grid item xs={12} sm={isMain ? 6 : 4} md={4} lg={isMain ? 3 : 2}>
 
+            {/* {
+              (isBlog || isPost) && 
+              <Lineage pathname={router.asPath} />
+            } */}
+            
             {
-              !isMain && 
-              <RightSidebar />
+              (isBlog || isPost) && 
+              <PostsYearly />
             }
             <Box
               sx={{ display: { xs: isMain || isBlog ? 'block' : 'none', md: 'block' } }}
