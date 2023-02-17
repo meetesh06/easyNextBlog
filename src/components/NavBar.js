@@ -178,7 +178,7 @@ function NavBar() {
                 </Link>
               })}
             </Box>
-            <ToggleButton 
+            <IconButton 
               className={classes.toggleButton}
               // color="info"
               onClick={() => { 
@@ -188,7 +188,7 @@ function NavBar() {
               {
                 currMode === "light" ? <LightMode /> : <DarkMode />
               }
-            </ToggleButton>
+            </IconButton>
           </Toolbar>
         </Container>
       </AppBar>

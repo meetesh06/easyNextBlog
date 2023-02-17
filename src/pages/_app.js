@@ -16,12 +16,12 @@ const clientSideEmotionCache = createEmotionCache();
 
 
 function ThemeWrapper (props){
+  
   const currMode = useSelector(getMode);
 
-  const [mode, setMode] = useState("dark")
+  const [mode, setMode] = useState(currMode)
 
   useEffect(() => {
-    console.log("currMode: ", currMode)
     setMode(currMode)
   }, [currMode])
 

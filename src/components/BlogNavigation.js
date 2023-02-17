@@ -72,7 +72,7 @@ sortedPosts.forEach((p) => {
 export default function PostsYearly(props) {
   const { posts, categories } = blogPostsData;
   const currPost = useSelector(selectCurrentPost);
-  const [expanded, setExpanded] = React.useState(["1"]);
+  const [expanded, setExpanded] = React.useState(["3", "2-1", "2", "1"]);
   const [selected, setSelected] = React.useState([]);
   const [lineageList, setLineageList] = React.useState([]);
 
@@ -94,6 +94,7 @@ export default function PostsYearly(props) {
   
 
   const handleToggle = (event, nodeIds) => {
+    console.log(nodeIds)
     setExpanded(nodeIds);
   };
 
@@ -104,7 +105,6 @@ export default function PostsYearly(props) {
   return (
     <TreeView
       aria-label="customized"
-      defaultExpanded={["1", "2", "2-1", "3"]}
       defaultCollapseIcon={<MinusSquare />}
       defaultExpandIcon={<PlusSquare />}
       defaultEndIcon={<CloseSquare />}

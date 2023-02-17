@@ -8,7 +8,6 @@ export const darkModeSlice = createSlice({
   reducers: {
     toggleMode: (state, action) => {
       state.mode = state.mode == "dark" ? "light" : "dark";
-      console.log(state.mode)
     }
   }
 });

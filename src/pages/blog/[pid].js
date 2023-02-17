@@ -41,6 +41,15 @@ const classes = {
   categoryName: `${PREFIX}-categoryName`,
   dateHolder: `${PREFIX}-dateHolder`,
   markdownImage: `${PREFIX}-markdownImage`,
+  markdownContainer: `${PREFIX}-markdownContainer`,
+  md_p: `${PREFIX}-md_p`,
+  md_h1: `${PREFIX}-md_h1`,
+  md_h2: `${PREFIX}-md_h2`,
+  md_h3: `${PREFIX}-md_h3`,
+  md_h4: `${PREFIX}-md_h4`,
+  md_h5: `${PREFIX}-md_h5`,
+  md_h6: `${PREFIX}-md_h6`,
+
 };
 
 const Root = styled('div')((
@@ -76,7 +85,8 @@ const Root = styled('div')((
   },
 
   [`& .${classes.divider}`]: {
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
   },
 
   [`& .${classes.categoryName}`]: {
@@ -91,6 +101,46 @@ const Root = styled('div')((
 
   [`& .${classes.markdownImage}`]: {
     maxWidth: '100%'
+  },
+
+  [`& .${classes.markdownContainer}`]: {
+    padding: theme.spacing(1)
+  },
+
+  [`& .${classes.md_p}`]: {
+    fontSize: theme.typography.pxToRem(20),
+    color: theme.palette.text.secondary,
+    lineHeight: 1.7
+  },
+
+  [`& .${classes.md_h1}`]: {
+    color: theme.palette.text.secondary,
+    lineHeight: 1.7
+  },
+
+  [`& .${classes.md_h2}`]: {
+    color: theme.palette.text.secondary,
+    lineHeight: 1.7
+  },
+
+  [`& .${classes.md_h3}`]: {
+    color: theme.palette.text.secondary,
+    lineHeight: 1.7
+  },
+
+  [`& .${classes.md_h4}`]: {
+    color: theme.palette.text.secondary,
+    lineHeight: 1.7
+  },
+
+  [`& .${classes.md_h5}`]: {
+    color: theme.palette.text.secondary,
+    lineHeight: 1.7
+  },
+
+  [`& .${classes.md_h6}`]: {
+    color: theme.palette.text.secondary,
+    lineHeight: 1.7
   },
 
 }));
@@ -164,30 +214,64 @@ function PostContainer({ title, category, created, postText, description, lineag
                 </Typography>
               </span>
               <Divider className={classes.divider} variant="middle" />
-              <ReactMarkdown
-                components={{
-                  img: ImageRenderer,
-                  code({node, inline, className, children, ...props}) {
-                    const match = /language-(\w+)/.exec(className || '')
-                    return (
-                      <SyntaxHighlighter
-                        wrapLines
-                        wrapLongLines
-                        children={String(children).replace(/\n$/, '')}
-                        style={xonokai}
-                        language={"java"}
-                        PreTag="div"
-                        {...props}
-                      />
-                    )
-                  },
-                  
-                }}            
-                // remarkPlugins={[remarkMath]}
-                // rehypePlugins={[rehypeKatex]}
-                >
-                {postText}
-              </ReactMarkdown>
+              <div className={classes.markdownContainer}>
+
+                <ReactMarkdown
+                  className={classes.md_p}
+                  components={{
+                    img: ImageRenderer,
+                    code({node, inline, className, children, ...props}) {
+                      const match = /language-(\w+)/.exec(className || '')
+                      return (
+                        <SyntaxHighlighter
+                          wrapLines
+                          wrapLongLines
+                          children={String(children).replace(/\n$/, '')}
+                          style={xonokai}
+                          language={match ? match[1] : undefined}
+                          PreTag="div"
+                          {...props}
+                        />
+                      )
+                    },
+                    h1: ({children}) => {
+                      return <Typography variant='h3' className={classes.md_h1}>
+                        {String(children)}
+                      </Typography>
+                    },
+                    h2: ({children}) => {
+                      return <Typography variant='h4' className={classes.md_h2}>
+                        {String(children)}
+                      </Typography>
+                    },
+                    h3: ({children}) => {
+                      return <Typography variant='h5' className={classes.md_h3}>
+                        {String(children)}
+                      </Typography>
+                    },
+                    h4: ({children}) => {
+                      return <Typography variant='h6' className={classes.md_h4}>
+                        {String(children)}
+                      </Typography>
+                    },
+                    h5: ({children}) => {
+                      return <Typography variant='h6' className={classes.md_h5}>
+                        {String(children)}
+                      </Typography>
+                    },
+                    h6: ({children}) => {
+                      return <Typography variant='h6' className={classes.md_h6}>
+                        {String(children)}
+                      </Typography>
+                    },
+                    
+                  }}            
+                  // remarkPlugins={[remarkMath]}
+                  // rehypePlugins={[rehypeKatex]}
+                  >
+                  {postText}
+                </ReactMarkdown>
+              </div>
             </div>
           </Paper>
         </Root>

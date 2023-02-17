@@ -16,13 +16,22 @@ const AnimatedCharacters = (props) => {
   const item = {
     hidden: {
       y: "200%",
-      transition: { ease: [0.455, 0.03, 0.515, 0.955], duration: 0.85 }
     },
     visible: {
       y: 0,
-      transition: { ease: [0.455, 0.03, 0.515, 0.955], duration: 0.75 }
     }
   };
+
+  const cursor = {
+    hidden: {
+      opacity: 0,
+      transition: { ease: [0.455, 0.03, 0.515, 0.955], duration: 0.85 }
+    },
+    visible: {
+      opacity: 1,
+      transition: { ease: [0.455, 0.03, 0.515, 0.955], duration: 0.75 }
+    }
+  }
 
   //  Split each word of props.text into an array
   const splitWords = props.text.split(" ");
@@ -70,6 +79,20 @@ const AnimatedCharacters = (props) => {
           </Wrapper>
         );
       })}
+      <motion.div
+        // style={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ 
+          type: 'spring',
+          repeat: Infinity, 
+          repeatType: 'reverse',
+          duration: 0.7, 
+          ease: [0.455, 0.03, 0.515, 0.955], duration: 0.85
+        }}
+     
+        // variants={cursor} 
+        // transition={{repeat: Infinity, duration: 2, repeatType: 'reverse'}} 
+        style={{ opacity: 0.3, width: 2, height: 35, backgroundColor: 'white', display: 'inline-block' }}></motion.div>
       {/* {} */}
     </Typography>
   );
