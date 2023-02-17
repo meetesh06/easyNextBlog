@@ -103,7 +103,7 @@ function NavBar() {
             <Box sx={{ position: 'relative', top: -5, display: { xs: 'inline-block', md: 'none' } }}>
               <IconButton
                 size="large"
-                aria-label="navbar button"
+                aria-label="menu"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleOpenNavMenu}
@@ -179,6 +179,7 @@ function NavBar() {
               })}
             </Box>
             <IconButton 
+              aria-label="toggle darkmode"
               className={classes.toggleButton}
               // color="info"
               onClick={() => { 
