@@ -3,7 +3,10 @@ const basePath = require("./basePath.json")
 const nextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
-  basePath: basePath.basePath
+  basePath: basePath.basePath,
+  images: {
+    unoptimized: true
+  }
 }
 
 module.exports = nextConfig
