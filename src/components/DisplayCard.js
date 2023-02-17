@@ -12,6 +12,10 @@ import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { getMode } from '@/store/darkModeSlice';
 
+import blogPic from '../../public/blog-pic.webp'
+
+import Image from 'next/image'
+
 const PREFIX = 'DisplayCard';
 
 const classes = {
@@ -181,11 +185,11 @@ export default function DisplayCard(props) {
         >
         {
           imageUri &&
-            <CardMedia
-              component="img"
-              height="220"
-              image={imageUri}
+            <Image
+              // component={Image}
+              src={blogPic}
               alt={title}
+              placeholder="blur"
             />
         }
         {
