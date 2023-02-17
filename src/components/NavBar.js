@@ -103,9 +103,7 @@ function NavBar() {
             <Box sx={{ position: 'relative', top: -5, display: { xs: 'inline-block', md: 'none' } }}>
               <IconButton
                 size="large"
-                aria-label="menu"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
+                aria-label="open menu"
                 onClick={handleOpenNavMenu}
                 color="inherit"
               >
