@@ -24,14 +24,56 @@ import {
 } from '@/config'
 
 import pagesData from "@/pagesData.json";
+import styled from '@emotion/styled';
+import { ToggleButton } from '@mui/material';
+import { DarkMode, FormatBold, LightMode } from '@mui/icons-material';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { getMode, toggleMode } from '@/store/darkModeSlice';
+
+const PREFIX = 'NavBar';
+
+const classes = {
+  appbar: `${PREFIX}-appbar`,
+  navLink: `${PREFIX}-navlink`,
+  navlinkSelected: `${PREFIX}-navlinkSelected`,
+  toggleButton: `${PREFIX}-toggleButton`,
+};
+
+const Root = styled('div')((
+  {
+    theme
+  }
+) => ({
+    [`& .${classes.appbar}`]: {
+      marginBottom: theme.spacing(2),
+      padding: theme.spacing(1),
+    },
+    [`& .${classes.navLink}`]: {
+      color: theme.palette.mode === "light" ? "#d0d0d0" : "gray",
+      fontWeight: 'bold'
+    },
+    [`& .${classes.toggleButton}`]: {
+      marginLeft: theme.spacing(1),
+      color: theme.palette.mode === "light" ? "yellow" : "gray",
+      fontWeight: 'bold'
+    },
+    [`& .${classes.navlinkSelected}`]: {
+      color: theme.palette.mode === "light" ? '#fff' : "#fff",
+      fontWeight: 'bold'
+    },
+
+  }
+))
 
 
 
 function NavBar() {
+  const dispatch = useDispatch();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const router = useRouter();
+  const currMode = useSelector(getMode);
 
   
 
@@ -53,91 +95,104 @@ function NavBar() {
   }
 
   return (
-    <AppBar elevation={0} position="static" color="transparent">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
+    <Root>
+      <AppBar elevation={currMode === "light" ? undefined : 0} className={classes.appbar} position="static" color="primary">
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
 
-          <Box sx={{ position: 'relative', top: -5, display: { xs: 'inline-block', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="navbar button"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
+            <Box sx={{ position: 'relative', top: -5, display: { xs: 'inline-block', md: 'none' } }}>
+              <IconButton
+                size="large"
+                aria-label="navbar button"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: 'block', md: 'none' },
+                }}
+              >
+                {pagesData.pages.map((page) => (
+                  <Link
+                  key={`nav-${page[1]}`}
+                    href={page[1]}
+                    >
+                    <MenuItem
+                      disabled={page[2]}
+                      onClick={handleCloseNavMenu}
+                    >
+                      <Typography textAlign="center">{page[0]}</Typography>
+                    </MenuItem>
+                  </Link>
+                ))}
+              </Menu>
+            </Box>
+
+            <motion.div
+              key="header-logo"
+              style={{
+                  flexGrow: 1
+              }}
+              className="App"
+              initial="hidden"
+              animate="visible"
+              variants={container}
             >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pagesData.pages.map((page) => (
-                <Link
-                key={`nav-${page[1]}`}
+              <div className="container">
+                <AnimatedText type="heading1" text={SITENAME} />
+              </div>
+            </motion.div>
+
+
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+              {pagesData.pages.map((page) => {
+                const currPath = router.pathname === page[1]
+                return <Link
+                  key={`nav-${page[1]}`}
                   href={page[1]}
                   >
-                  <MenuItem
+                  <Button
                     disabled={page[2]}
-                    onClick={handleCloseNavMenu}
+                    className={currPath ? classes.navlinkSelected : classes.navLink}
+                    // sx={(theme) => { return {my: 2, fontWeight: currPath ? "bold" : "normal", color: currPath ? 'text.primary' : 'text.secondary'} }}
                   >
-                    <Typography textAlign="center">{page[0]}</Typography>
-                  </MenuItem>
+                    {page[0]}
+                  </Button>
                 </Link>
-              ))}
-            </Menu>
-          </Box>
-
-          <motion.div
-            key="header-logo"
-            style={{
-                flexGrow: 1
-            }}
-            className="App"
-            initial="hidden"
-            animate="visible"
-            variants={container}
-          >
-            <div className="container">
-              <AnimatedText type="heading1" text={SITENAME} />
-            </div>
-          </motion.div>
-
-
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            {pagesData.pages.map((page) => {
-              const currPath = router.pathname === page[1]
-              return <Link
-                key={`nav-${page[1]}`}
-                href={page[1]}
-                >
-                <Button
-                  disabled={page[2]}
-                  
-                  sx={(theme) => { return {my: 2, fontWeight: currPath ? "bold" : "normal", color: currPath ? 'text.primary' : 'text.secondary'} }}
-                >
-                  {page[0]}
-                </Button>
-              </Link>
-            })}
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+              })}
+            </Box>
+            <ToggleButton 
+              className={classes.toggleButton}
+              // color="info"
+              onClick={() => { 
+                dispatch(toggleMode());
+              }} 
+            >
+              {
+                currMode === "light" ? <LightMode /> : <DarkMode />
+              }
+            </ToggleButton>
+          </Toolbar>
+        </Container>
+      </AppBar>
+    </Root>
   );
 }
 export default NavBar;

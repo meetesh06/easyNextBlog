@@ -8,12 +8,6 @@ const Wrapper = (props) => {
   return <span className="word-wrapper">{props.children}</span>;
 };
 
-// Map API "type" vaules to JSX tag names
-const tagMap = {
-  paragraph: "p",
-  heading1: "h1"
-};
-
 // AnimatedCharacters
 // Handles the deconstruction of each word and character to setup for the
 // individual character animations
@@ -46,11 +40,8 @@ const AnimatedCharacters = (props) => {
     return word.push("\u00A0");
   });
 
-  // Get the tag name from tagMap
-  const Tag = tagMap[props.type];
-
   return (
-    <Tag>
+    <Typography variant="h4" component="h4">
       {words.map((word, index) => {
         return (
           // Wrap each word in the Wrapper component
@@ -58,29 +49,29 @@ const AnimatedCharacters = (props) => {
             {words[index].flat().map((element, index) => {
               return (
                 <span
-                  style={{
-                    overflow: "hidden",
-                    display: "inline-block"
-                  }}
-                  key={index}
-                >
-                  <Typography variant="h4" component="h1">
-                    <motion.span
-                      style={{ display: "inline-block" }}
-                      variants={item}
-                    >
-                      {element}
-                    </motion.span>
+                style={{
+                  overflow: "hidden",
+                  display: "inline-block",
+                  position: 'relative',
+                  top: 5
+                }}
+                key={index}
+              >
+                  <motion.span
+                    style={{ display: "inline-block" }}
+                    variants={item}
+                  >
+                    {element}
+                  </motion.span>
 
-                  </Typography>
-                </span>
+              </span>
               );
             })}
           </Wrapper>
         );
       })}
       {/* {} */}
-    </Tag>
+    </Typography>
   );
 };
 

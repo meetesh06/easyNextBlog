@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
@@ -198,10 +198,20 @@ function PostContainer({ title, category, created, postText, description, lineag
 function PostPage(props) {
   // Hooks
   const router = useRouter()
+  const { pid } = router.query;
+  const { posts } = blogPostsData
 
   const dispatch = useDispatch();
-  
-  const { pid } = router.query;
+
+  useEffect(() => {
+    if (pid) {
+      let post = JSONPath({path: `$.[?(@.id === "${pid}")]`, json: posts})
+      if (post.length > 0) {
+        post = post[0]
+        dispatch(updateCurrentPost({pid: post.id, refId: post.refId, lineage: post.lineage}));
+      }
+    }
+  }, [pid])
   
   let id = undefined;
   
@@ -214,7 +224,7 @@ function PostPage(props) {
       <Typography gutterBottom variant="h6" component="h2">
         {msg}
       </Typography>
-      <Skeleton style={{borderRadius: 5}} variant="rectangular" width={"100%"} height={"60vh"} />
+      <Skeleton className={classes.paper} variant="rectangular" width={"100%"} height={"60vh"} />
     </div>
   )
 
@@ -223,7 +233,7 @@ function PostPage(props) {
   } else {
     const { posts } = blogPostsData
     let post = JSONPath({path: `$.[?(@.id === "${pid}")]`, json: posts})
-    dispatch(updateCurrentPost(pid))
+    
     if (post.length == 0) {
       return renderSkeleton("Post not found, please drop me an email so I can have a look, Thank you 👻")
     }

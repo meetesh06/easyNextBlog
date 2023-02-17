@@ -64,7 +64,7 @@ const content = [
     imageUri: undefined,
     href: undefined,
     id: undefined,
-    text: "I find myself comfortable in",
+    text: undefined,
     textList: [
       ["C, C++, Java", "Experience in large real world projects"],
       ["React/Native, JS, R", "A lot of fun projects like this site. Worked on a JIT compiler for R called Rsh."],

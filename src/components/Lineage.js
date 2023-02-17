@@ -62,39 +62,21 @@ const StyledTreeItem = styled((props) => (
 }));
 
 function Lineage(props) {
-  const {pathname} = props
-
-  const posts = blogPostsData.posts;
-  const post = useSelector(selectCurrentPost);
-
-  console.log("lineage: ", post)
-  console.log("posts: ", posts)
+  const { posts } = blogPostsData;
+  const currPost = useSelector(selectCurrentPost);
 
 
   function calculateLineage() {
-    if(post && post.length > 0) {
-      const lineageList = JSONPath({path: `$.[?(@.lineage === "${post[0].lineage}")]`, json: posts});
+    if(currPost) {
+      const lineageList = JSONPath({path: `$.[?(@.lineage === "${currPost.lineage}")]`, json: posts});
       lineageList.sort(sortPosts);
-      return {list: lineageList, id: post[0].id, name: post[0].lineage};
+      return lineageList
     } else {
-      return {};
+      return null;
     }
   }
 
   const lineageData = calculateLineage();
-  console.log("lineageData: ", lineageData)
-
-  
-
-  const staticContentVariants = {
-    hidden: {opacity: 0},
-    show: {
-      opacity: 1,
-      transition: {
-        duration: 0.5
-      }
-    }
-  }
 
   return (
     <TreeView
@@ -106,10 +88,10 @@ function Lineage(props) {
       sx={{ minHeight: 100, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
     >
       {
-        lineageData.list && 
-          <StyledTreeItem nodeId="1" label={lineageData.name}>
+        lineageData && 
+          <StyledTreeItem nodeId="1" label={currPost.lineage}>
             {
-              lineageData.list.map((p, index) => {
+              lineageData.map((p, index) => {
                 const currUrl = parsePostUrl(p.id, p.title)
                 console.log("url: ", currUrl)
                 return <Link 
@@ -120,7 +102,7 @@ function Lineage(props) {
                         <Typography noWrap variant='caption'>
                           {`${p.created} - `}
                         </Typography>
-                        <Typography noWrap variant='caption' sx={(theme) => { return{ color: pathname.includes(currUrl)  ? theme.palette.type === 'dark' ? theme.palette.primary.light : theme.palette.primary.dark : undefined }; }}>
+                        <Typography noWrap variant='caption' sx={(theme) => { return{ color: p.id == currPost.id  ? theme.palette.type === 'dark' ? theme.palette.primary.light : theme.palette.primary.dark : undefined }; }}>
                           {p.title}
                         </Typography>
 

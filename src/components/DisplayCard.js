@@ -3,18 +3,26 @@ import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions, CardMedia } from '@mui/material';
+import { Button, CardActionArea, CardActions, CardMedia, Divider } from '@mui/material';
 import { motion, useAnimation, useInView } from 'framer-motion';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { useRef } from 'react';
+import { useSelector } from 'react-redux';
+import { getMode } from '@/store/darkModeSlice';
 
 const PREFIX = 'DisplayCard';
 
 const classes = {
   card: `${PREFIX}-card`,
-  newsItem: `${PREFIX}-newsItem`
+  newsItem: `${PREFIX}-newsItem`,
+  cardTitle: `${PREFIX}-title`,
+  cardDate: `${PREFIX}-date`,
+  cardText: `${PREFIX}-text`,
+  cardButton: `${PREFIX}-button`,
+  newsItemText: `${PREFIX}-newsItemText`,
+  cardDivider: `${PREFIX}-cardDivider`,
 };
 
 const Root = styled('div')((
@@ -30,8 +38,34 @@ const Root = styled('div')((
   [`& .${classes.newsItem}`]: { 
     marginRight: theme.spacing(1),
     fontWeight: 'bold', 
-    color: theme.palette.type === 'dark' ? theme.palette.primary.light : theme.palette.primary.dark
-  }
+    color: theme.palette.mode === "light" ? theme.palette.primary.main : theme.palette.primary.dark
+  },
+
+  [`& .${classes.cardTitle}`]: { 
+    color: theme.palette.mode === "light" ? theme.palette.primary.main : undefined
+  },
+
+  [`& .${classes.cardDate}`]: { 
+    color: theme.palette.primary.dark
+  },
+
+  [`& .${classes.cardText}`]: { 
+    color: theme.palette.text.secondary,
+    marginBottom: 0
+  },
+
+  [`& .${classes.cardButton}`]: { 
+    color: theme.palette.primary.dark,
+    fontWeight: "bold"
+  },
+
+  [`& .${classes.newsItemText}`]: { 
+    color: theme.palette.text.secondary
+  },
+
+  [`& .${classes.cardDivider}`]: { 
+    marginBottom: theme.spacing(2)
+  },
 }));
 
 const StaticCardContent = (props) => {
@@ -66,19 +100,20 @@ const StaticCardContent = (props) => {
     <CardContent>
       {
         created && 
-        <Typography variant="caption" color="text.primary">
+        <Typography variant="caption" className={classes.cardDate}>
           {created}
         </Typography>
       }
       {
         title && 
-        <Typography gutterBottom variant="h5" component="h5">
+        <Typography gutterBottom variant="h5" component="h5" className={classes.cardTitle}>
           {title}
         </Typography>
       }
+
       {
         text &&
-        <Typography paragraph variant='body1' color="text.secondary">
+        <Typography paragraph variant='body1' className={classes.cardText}>
           {text}
         </Typography>
       }
@@ -96,14 +131,14 @@ const StaticCardContent = (props) => {
           style={{
             padding: 0
           }}
-          color="text.secondary">
+          >
           {
             textList.map((data,index) => 
               <motion.li key={`${data[0]}-${index}`} style={{listStyle: 'none'}} variants={listItem}>
                 <div className={classes.newsItem}>
                   {data[0]}
                 </div>
-                <div>
+                <div className={classes.newsItemText}>
                   {data[1]}
                 </div>
               </motion.li>
@@ -122,12 +157,14 @@ export default function DisplayCard(props) {
   const { title, links, index, imageUri,  href, id } = props
   const [hovered, setHovered] = useState(false);
 
-  
+  const currMode = useSelector(getMode);
+
   
   return (
     <Root className={classes.card} >
 
       <Card
+        variant={currMode === 'light' ? "outlined" : "elevation" }
         key={index}
         layout 
         component={motion.div}
@@ -139,7 +176,7 @@ export default function DisplayCard(props) {
         }}
         onHoverStart={() => setHovered(true)}
         onHoverEnd={() => setHovered(false)}
-        raised={hovered}
+        // raised={hovered}
         
         >
         {
@@ -168,7 +205,7 @@ export default function DisplayCard(props) {
             <CardActions>
               {
                 links.map((link, index) => {
-                  return <Button key={`${link[1]}-${index}`} href={link[0]} target="_blank" size="small">{link[1]}</Button>
+                  return <Button className={classes.cardButton} key={`${link[1]}-${index}`} href={link[0]} target="_blank" size="small">{link[1]}</Button>
                 })
               }
             </CardActions>

@@ -5,8 +5,10 @@ import Head from 'next/head'
 import DisplayCard from './DisplayCard'
 import NavBar from './NavBar'
 import { Box, createTheme, CssBaseline, Grid, responsiveFontSizes, ScopedCssBaseline } from '@mui/material';
-import PostsYearly from './PostsYearly';
-import Lineage from './Lineage'
+import BlogNavigation from './BlogNavigation';
+
+import { motion } from 'framer-motion';
+
 import {
   leftSide
 } from '@/config'
@@ -20,6 +22,16 @@ function PageLayout(props) {
   const isBlog = router.pathname === "/blog"
   const isPost = router.pathname === "/blog/[pid]"
 
+  const navTrans = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  }
+
   return(
     <React.Fragment>
       <NavBar />
@@ -27,15 +39,18 @@ function PageLayout(props) {
         <Grid container spacing={1}>
           <Grid item xs={12} sm={isMain ? 6 : 4} md={4} lg={isMain ? 3 : 2}>
 
-            {/* {
-              (isBlog || isPost) && 
-              <Lineage pathname={router.asPath} />
-            } */}
-            
             {
               (isBlog || isPost) && 
-              <PostsYearly />
+              <motion.div
+                variants={navTrans}
+                initial="hidden"
+                animate="show"
+              >
+                <BlogNavigation />
+              </motion.div>
             }
+            
+
             <Box
               sx={{ display: { xs: isMain || isBlog ? 'block' : 'none', md: 'block' } }}
               >
@@ -47,7 +62,7 @@ function PageLayout(props) {
                 small={!isMain}
                 />
             </Box>
-
+            
 
             {
               isMain && 

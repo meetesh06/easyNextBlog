@@ -13,6 +13,8 @@ import { Tooltip, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { selectCurrentPost } from '@/store/currentPostSlice';
+import { useEffect } from 'react';
+import { JSONPath } from 'jsonpath-plus';
 
 function MinusSquare(props) {
   return (
@@ -67,15 +69,31 @@ sortedPosts.forEach((p) => {
   last = curr;
 })
 
-console.log("years", years)
-
 export default function PostsYearly(props) {
-  const pid = useSelector(selectCurrentPost);
+  const { posts, categories } = blogPostsData;
+  const currPost = useSelector(selectCurrentPost);
   const [expanded, setExpanded] = React.useState(["1"]);
   const [selected, setSelected] = React.useState([]);
+  const [lineageList, setLineageList] = React.useState([]);
+
+
+  useEffect(() => {
+    if (currPost) {
+      let post = JSONPath({path: `$.[?(@.id === "${currPost.pid}")]`, json: posts})
+      if (post.length > 0) {
+        post = post[0]
+        let year = moment(post.created, 'DD-MM-YYYY').toDate().getFullYear().toString();
+        setExpanded(["1", `yearly-${year}`, "2", "2-1", "3", `cat-${post.category}`])
+      }
+
+      const ll = JSONPath({path: `$.[?(@.lineage === "${currPost.lineage}")]`, json: posts});
+      ll.sort(sortPosts);
+      setLineageList(ll);
+    }
+  }, [currPost])
+  
 
   const handleToggle = (event, nodeIds) => {
-    console.log("handleToggle", nodeIds)
     setExpanded(nodeIds);
   };
 
@@ -86,11 +104,11 @@ export default function PostsYearly(props) {
   return (
     <TreeView
       aria-label="customized"
-      defaultExpanded={["1"]}
+      defaultExpanded={["1", "2", "2-1", "3"]}
       defaultCollapseIcon={<MinusSquare />}
       defaultExpandIcon={<PlusSquare />}
       defaultEndIcon={<CloseSquare />}
-      sx={{ minHeight: 100, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
+      sx={(theme) => { return { marginBottom: theme.spacing(2), padding: theme.spacing(1), minHeight: 100, flexGrow: 1, maxWidth: '100%', overflowY: 'auto' }}}
       expanded={expanded}
       selected={selected}
       onNodeToggle={handleToggle}
@@ -100,6 +118,7 @@ export default function PostsYearly(props) {
       <StyledTreeItem nodeId="1" label="Posts">
 
         {
+          years &&
           years.map((year, index) => {
             const yearPosts = []
             sortedPosts.forEach((p) => {
@@ -107,7 +126,7 @@ export default function PostsYearly(props) {
               if (year === curr) yearPosts.push(p)
             })
             return(
-              <StyledTreeItem  nodeId={`yearly-${year}`} label={year}>
+              <StyledTreeItem key={`yearly-${year}`} nodeId={`yearly-${year}`} label={year}>
                 {
                   yearPosts.map((p, index) => {
                     const currUrl = parsePostUrl(p.id, p.title)
@@ -116,7 +135,7 @@ export default function PostsYearly(props) {
                       href={currUrl}>
                         <Tooltip title={p.title} placement="right" arrow>
                           <div style={{ cursor: 'pointer'}}>
-                            <Typography noWrap variant='caption' sx={(theme) => { return{ color: pid == p.id ? theme.palette.type === 'dark' ? theme.palette.primary.light : theme.palette.primary.dark : undefined }; }}>
+                            <Typography noWrap variant='caption' sx={(theme) => { return{ color: currPost && currPost.pid == p.id ? theme.palette.type === 'dark' ? theme.palette.primary.light : theme.palette.primary.dark : undefined }; }}>
                               {p.title}
                             </Typography>
 
@@ -129,6 +148,61 @@ export default function PostsYearly(props) {
             )
           })
         }
+      </StyledTreeItem>
+
+      <StyledTreeItem nodeId="2" label="Lineage">
+          {
+            currPost &&
+            <StyledTreeItem nodeId="2-1" label={currPost.lineage}>
+              {
+                lineageList.map((p, index) => {
+                  const currUrl = parsePostUrl(p.id, p.title)
+                  return <Link 
+                    key={currUrl + "/"}
+                    href={currUrl}>
+                      <Tooltip title={p.title} placement="right" arrow>
+                        <div style={{ cursor: 'pointer'}}>
+                          <Typography noWrap variant='caption' sx={(theme) => { return{ color: currPost && currPost.pid == p.id ? theme.palette.type === 'dark' ? theme.palette.primary.light : theme.palette.primary.dark : undefined }; }}>
+                            {p.title}
+                          </Typography>
+  
+                        </div>
+                      </Tooltip>
+                  </Link> 
+                })
+              }
+            </StyledTreeItem>
+          }
+
+      </StyledTreeItem>
+
+      <StyledTreeItem nodeId="3" label="Categories">
+        {
+          categories &&
+            categories.map((category, index) => {
+                const postsInCategory = JSONPath({path: `$.[?(@.category === "${category}")]`, json: posts});
+                return <StyledTreeItem key={`cat-${category}`} nodeId={`cat-${category}`} label={category}>
+                  {
+                    postsInCategory.map((p) => {
+                      const currUrl = parsePostUrl(p.id, p.title)
+                      return <Link 
+                        key={currUrl + "/"}
+                        href={currUrl}>
+                          <Tooltip title={p.title} placement="right" arrow>
+                            <div style={{ cursor: 'pointer'}}>
+                              <Typography noWrap variant='caption' sx={(theme) => { return{ color: currPost && currPost.pid == p.id ? theme.palette.type === 'dark' ? theme.palette.primary.light : theme.palette.primary.dark : undefined }; }}>
+                                {p.title}
+                              </Typography>
+      
+                            </div>
+                          </Tooltip>
+                      </Link> 
+                    })
+                  }
+                </StyledTreeItem>
+              })
+            
+            }
       </StyledTreeItem>
     </TreeView>
   );

@@ -27,11 +27,8 @@ import {
   motion
 } from 'framer-motion';
 
-import { selectSecret } from '@/store/secretState';
 
 
-import { useState } from 'react';
-import { Close, UndoRounded } from '@mui/icons-material';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
