@@ -30,6 +30,7 @@ import { DarkMode, FormatBold, LightMode } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getMode, toggleMode } from '@/store/darkModeSlice';
+import LinkMui from '@mui/material/Link';
 
 const PREFIX = 'NavBar';
 
@@ -50,6 +51,8 @@ const Root = styled('div')((
       padding: theme.spacing(1),
     },
     [`& .${classes.navLink}`]: {
+      textDecoration: 'none',
+      marginRight: theme.spacing(1),
       color: theme.palette.mode === "light" ? "#d0d0d0" : "gray",
       fontWeight: 'bold'
     },
@@ -59,6 +62,8 @@ const Root = styled('div')((
       fontWeight: 'bold'
     },
     [`& .${classes.navlinkSelected}`]: {
+      textDecoration: 'none',
+      marginRight: theme.spacing(1),
       color: theme.palette.mode === "light" ? '#fff' : "#fff",
       fontWeight: 'bold'
     },
@@ -133,6 +138,7 @@ function NavBar() {
                     href={page[1]}
                     >
                     <MenuItem
+                      component="a"
                       disabled={page[2]}
                       onClick={handleCloseNavMenu}
                     >
@@ -166,12 +172,17 @@ function NavBar() {
                   key={`nav-${page[1]}`}
                   href={page[1]}
                   >
-                  <Button
-                    disabled={page[2]}
-                    className={currPath ? classes.navlinkSelected : classes.navLink}
-                  >
-                    {page[0]}
-                  </Button>
+                    <a
+                      className={currPath ? classes.navlinkSelected : classes.navLink}
+                    >
+                      <Typography
+                        disabled={page[2]}
+                        className={currPath ? classes.navlinkSelected : classes.navLink}
+                      >
+                        {page[0]}
+                      </Typography>
+
+                    </a>
                 </Link>
               })}
             </Box>
