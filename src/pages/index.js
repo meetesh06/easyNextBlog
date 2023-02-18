@@ -5,8 +5,8 @@ export const config = {
   disable: false
 }
 
-const TITLE = "Meetesh's Homepage 🏴‍☠️ 🏴‍☠️ 🏴‍☠️"
-const DESCRIPTION = "Hey there! I'm a research scholar @IIT Mandi working in the area of compilers."
+const TITLE = "Meetesh Mehta 🏴‍☠️ 🏴‍☠️ 🏴‍☠️"
+const DESCRIPTION = "Hello! My name is Meetesh Mehta, and I am a research scholar at IIT Mandi specializing in the field of compilers. Specifically, I am interested in JIT Compilers, and my recent research has focused on reduction on warmup and deoptimization times. Compilers are a critical component of modern computing systems, and my work seeks to increase the level of specialization performed at runtime while keeping overheads to a minimum. I'm excited to share my findings with you and discuss this fascinating field further."
 
 const content = [
   {
@@ -53,7 +53,7 @@ const content = [
     imageUri: undefined,
     href: undefined,
     id: undefined,
-    text: "I absolutely love everything about computers and love to dive deeper into what makes them tick. I find myself comfortable in very high level abstractions like DSLs or React and also in low level things like code generation, assembly, C++.",
+    text: "Computers fascinate me, and I am constantly drawn to exploring the intricacies of their inner workings. From high-level abstractions like DSLs and React to low-level aspects such as code generation, assembly, and C++, I find myself equally comfortable navigating different levels of abstraction. I am passionate about staying up-to-date with the latest technological advancements and enjoy delving deeper into the field of computer science.",
     textList: undefined,
     created: undefined
   },
@@ -92,7 +92,7 @@ const content = [
     imageUri: undefined,
     href: undefined,
     id: undefined,
-    text: "I love to go out on long walks and hikes. You will find me listening to music or reading books/articles in my free time. I randomly start new personal projects like making a light controllers using arduino, setting up solar panels around the terrace and so on. If something piques my interest I will give it a shot.",
+    text: "I am an avid explorer and love to embark on long walks and hikes, often accompanied by my favorite tunes or a good book or article. In my free time, I enjoy taking on new personal projects, such as designing and building light controllers using Arduino, setting up solar panels on my terrace, and more. I am always on the lookout for interesting ideas and challenges, and enjoy learning new skills and techniques to bring them to fruition.",
     textList: undefined,
     created: undefined
   },

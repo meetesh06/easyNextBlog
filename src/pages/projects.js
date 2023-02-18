@@ -20,7 +20,7 @@ const content = [
     imageUri: undefined,
     href: undefined,
     id: undefined,
-    text: "I was tired of plain looking slow websites/blogs, so decided to make something that is fast and modern.",
+    text: "I was fed up with encountering slow, uninspiring websites and blogs, so I took it upon myself to create a website that is both visually appealing and lightning-fast. This site generator produces ready to deploy sites that are near perfect in LCP, FID and CLS.",
     textList: [
       ["React", ""],
       ["NextJS", ""]
@@ -36,7 +36,7 @@ const content = [
     imageUri: undefined,
     href: undefined,
     id: undefined,
-    text: "This was part of my final year B. Tech project where the aim was to create a simple easy to use language. The entire parser/code generator is written 100% in C and produces x86_64 compatible assembly code.",
+    text: "For my final year B.Tech project, I created a user-friendly programming language aimed at making programming accessible to beginners. Using C, I built the parser and code generator from scratch, ensuring full compatibility with the x86_64 architecture.",
     textList: [
       ["C", ""],
       ["X86_64 Assemble", ""],
@@ -53,7 +53,7 @@ const content = [
     imageUri: undefined,
     href: undefined,
     id: undefined,
-    text: "Simple utility written in python to manage moodle submissions, made it when I was a TA for the CS 502 (Compiler Design) course at IIT Mandi.",
+    text: "During my time as a Teaching Assistant for the CS 502 (Compiler Design) course at IIT Mandi, we recognized a need for a streamlined solution to manage moodle submissions. To address this we created a bunch of utilities and a frontend to make evaluations faster.",
     textList: [
       ["Python", ""],
     ],
@@ -66,7 +66,7 @@ const content = [
     imageUri: undefined,
     href: undefined,
     id: undefined,
-    text: "Made a debugger for the vasco framework to visualize the points to graph generation in Java programs, this was made as a mini project for the CS 611 (Program Analysis) course. The link is currently private, but should be able to share if interested.",
+    text: "For my mini project in the CS 611 (Program Analysis) course, I created a debugger for the vasco framework. This tool allows developers to visualize the points-to graph generation process in Java programs, providing valuable insights into program behavior.  Although the link is currently private, I am happy to share it upon request.",
     textList: [
       ["Java, Jimple", ""],
       ["React", ""]
@@ -83,7 +83,7 @@ const content = [
     imageUri: undefined,
     href: undefined,
     id: undefined,
-    text: "Have made a lot of React Native apps. The interesting one is Campus Story which was made as an effort to improve the communication channel between institutions students.",
+    text: "I have extensive experience in developing React Native apps, and one notable project is Campus Story. This app was designed to improve communication between students and institutions by providing a streamlined platform for sharing information and updates.",
     textList: [
       ["React Native", ""],
       ["ffmpeg", ""]
