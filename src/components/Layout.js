@@ -54,7 +54,7 @@ function PageLayout(props) {
               sx={{ display: { xs: isMain || isBlog ? 'block' : 'none', md: 'block' } }}
               >
               <DisplayCard
-                makeTitleH1
+                makeTitleH1={!isPost}
                 imageUri={leftSide.image}
                 title={leftSide.name} 
                 text={isMain ? leftSide.about : leftSide.getInTouchText}

@@ -73,7 +73,7 @@ const Root = styled('div')((
 }));
 
 const StaticCardContent = (props) => {
-  const { title, text, textList, created } = props;
+  const { title, text, textList, created, makeTitleH1 } = props;
 
   const ref = useRef(null)
   const isInView = useInView(ref)
