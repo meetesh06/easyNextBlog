@@ -110,7 +110,7 @@ const StaticCardContent = (props) => {
       }
       {
         title && 
-        <Typography gutterBottom variant="h5" component="h5" className={classes.cardTitle}>
+        <Typography gutterBottom variant="h5" component={makeTitleH1 ? "h1" : "h5"} className={classes.cardTitle}>
           {title}
         </Typography>
       }
