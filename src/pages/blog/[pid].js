@@ -29,7 +29,8 @@ import { Close } from '@mui/icons-material';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMode } from '@/store/darkModeSlice';
 
 const PREFIX = 'PostPage';
 
@@ -166,6 +167,7 @@ function PostContainer({ title, category, created, postText, description, lineag
       opacity: 0
     }
   }
+  const currMode = useSelector(getMode);
 
   const pageTransitions = {
     duration: .2,
@@ -198,9 +200,10 @@ function PostContainer({ title, category, created, postText, description, lineag
             initial="FadeOut"
             animate="FadeIn"
             exit="FadeOut"
+            
             variants={pageVariants}
             transition={pageTransitions}
-            className={classes.paper} elevation={3}>
+            className={classes.paper} elevation={currMode === "light" ? 5 : 3}>
             <div>
               <Typography
                 variant="h2"

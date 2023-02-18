@@ -1,10 +1,10 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head'
 
 import DisplayCard from './DisplayCard'
 import NavBar from './NavBar'
-import { Box, createTheme, CssBaseline, Grid, responsiveFontSizes, ScopedCssBaseline } from '@mui/material';
+import { Box, createTheme, CssBaseline, Grid, responsiveFontSizes, ScopedCssBaseline, ThemeProvider } from '@mui/material';
 import BlogNavigation from './BlogNavigation';
 
 import { motion } from 'framer-motion';
@@ -15,6 +15,8 @@ import {
 
 import { Container } from '@mui/system';
 import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMode, toggleMode } from '@/store/darkModeSlice';
 
 function PageLayout(props) {
   const router = useRouter();
@@ -38,7 +40,6 @@ function PageLayout(props) {
       <Container maxWidth="xl">
         <Grid container spacing={1}>
           <Grid item xs={12} sm={isMain ? 6 : 4} md={4} lg={isMain ? 3 : 2}>
-
             {
               (isBlog || isPost) && 
               <motion.div
@@ -49,8 +50,6 @@ function PageLayout(props) {
                 <BlogNavigation />
               </motion.div>
             }
-            
-
             <Box
               sx={{ display: { xs: isMain || isBlog ? 'block' : 'none', md: 'block' } }}
               >
@@ -62,8 +61,6 @@ function PageLayout(props) {
                 small={!isMain}
                 />
             </Box>
-            
-
             {
               isMain && 
               <DisplayCard 
@@ -72,7 +69,6 @@ function PageLayout(props) {
                 links={leftSide.contactLinks}
               />
             }
-
           </Grid>
           <Grid item xs={12} sm={isMain ? 6 : 8} md={8} lg={isMain ? 9 : 10}>
             {props.children}
@@ -85,13 +81,42 @@ function PageLayout(props) {
 }
 
 function Layout(props) {
-  const themeDark = createTheme({
+  const currMode = useSelector(getMode);
+
+  const light = createTheme({
     palette: {
-      mode: 'dark'
+      mode: 'light',
+      background: {
+        paper: '#e1e5f2',
+        // default: '#6a00f4'
+      },
+      primary: {
+        main: "#2274a5"
+      },
+      // secondary: {
+      //   main: indigo[600]
+      // },
+      text: {
+        primary: '#010334',
+        // disabled: '#f0f0f0',
+        secondary: '#000'
+      }
     } 
   });
 
-  let theme = themeDark;
+  const dark = createTheme({
+    palette: {
+      mode: 'dark',
+    } 
+  });
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    let localTheme = localStorage.getItem('mode')
+    if (currMode !== localTheme) 
+      dispatch(toggleMode(localTheme));
+  }, [])
+  let theme = currMode === "light" ? light : dark
 
   theme = responsiveFontSizes(theme);
 
@@ -102,16 +127,19 @@ function Layout(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <ScopedCssBaseline enableColorScheme>
-          <React.Fragment>
-            <CssBaseline />
+      <ThemeProvider theme={theme}>
+        <React.Fragment>
+          <CssBaseline />
+            <ScopedCssBaseline enableColorScheme>
               <Box sx={{ height: "100vh", overflow: "scroll"  }}>
                 <PageLayout>
                   {props.children}
                 </PageLayout>
               </Box>
-          </React.Fragment>
-        </ScopedCssBaseline>
+            </ScopedCssBaseline>
+        </React.Fragment>
+      </ThemeProvider>
+
       </main>
     </>
   );

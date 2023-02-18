@@ -169,7 +169,6 @@ function NavBar() {
                   <Button
                     disabled={page[2]}
                     className={currPath ? classes.navlinkSelected : classes.navLink}
-                    // sx={(theme) => { return {my: 2, fontWeight: currPath ? "bold" : "normal", color: currPath ? 'text.primary' : 'text.secondary'} }}
                   >
                     {page[0]}
                   </Button>
@@ -179,9 +178,10 @@ function NavBar() {
             <IconButton 
               aria-label="toggle darkmode"
               className={classes.toggleButton}
-              // color="info"
               onClick={() => { 
-                dispatch(toggleMode());
+                let toggleTo = currMode === "light" ? "dark" : "light";
+                localStorage.setItem('mode', toggleTo)
+                dispatch(toggleMode(toggleTo));
               }} 
             >
               {

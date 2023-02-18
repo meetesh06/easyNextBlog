@@ -87,8 +87,8 @@ function Blog(props) {
     </Hidden>
 
     {
-      years.map((year) => {
-        return <div>
+      years.map((year, index) => {
+        return <div key={`yearly-posts-container-${index}`}>
           <Typography variant='caption'>
             {year}
           </Typography>
