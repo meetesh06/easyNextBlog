@@ -227,8 +227,8 @@ function PostContainer({ title, category, created, postText, description, lineag
                       const match = /language-(\w+)/.exec(className || '')
                       return (
                         <SyntaxHighlighter
-                          wrapLines
-                          wrapLongLines
+                          // wrapLines
+                          // wrapLongLines
                           children={String(children).replace(/\n$/, '')}
                           style={xonokai}
                           language={match ? match[1] : undefined}
