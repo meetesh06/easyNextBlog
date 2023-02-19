@@ -4,8 +4,10 @@ import Head from 'next/head'
 
 import DisplayCard from './DisplayCard'
 import NavBar from './NavBar'
-import { Box, createTheme, CssBaseline, Grid, responsiveFontSizes, ScopedCssBaseline, ThemeProvider } from '@mui/material';
+import { Box, CssBaseline, Grid, responsiveFontSizes, ScopedCssBaseline, ThemeProvider } from '@mui/material';
 import BlogNavigation from './BlogNavigation';
+
+import { dark, light } from '@/config';
 
 import { motion } from 'framer-motion';
 
@@ -84,32 +86,7 @@ function PageLayout(props) {
 function Layout(props) {
   const currMode = useSelector(getMode);
 
-  const light = createTheme({
-    palette: {
-      mode: 'light',
-      background: {
-        paper: '#e1e5f2',
-        // default: '#6a00f4'
-      },
-      primary: {
-        main: "#2274a5"
-      },
-      // secondary: {
-      //   main: indigo[600]
-      // },
-      text: {
-        primary: '#010334',
-        // disabled: '#f0f0f0',
-        secondary: '#000'
-      }
-    } 
-  });
-
-  const dark = createTheme({
-    palette: {
-      mode: 'dark',
-    } 
-  });
+  
   const dispatch = useDispatch();
 
   useEffect(() => {

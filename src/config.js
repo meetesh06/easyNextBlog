@@ -1,5 +1,32 @@
 export const SITENAME = "Hello World";
 
+export const light = createTheme({
+  palette: {
+    mode: 'light',
+    background: {
+      paper: '#e1e5f2',
+      // default: '#6a00f4'
+    },
+    primary: {
+      main: "#2274a5"
+    },
+    // secondary: {
+    //   main: indigo[600]
+    // },
+    text: {
+      primary: '#010334',
+      // disabled: '#f0f0f0',
+      secondary: '#000'
+    }
+  } 
+});
+
+export const dark = createTheme({
+  palette: {
+    mode: 'dark',
+  } 
+});
+
 export const leftSide = {
   image: "/blog-pic.webp",
   name: "Meetesh Kalpesh Mehta",
