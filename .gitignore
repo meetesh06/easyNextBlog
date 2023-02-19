@@ -14,15 +14,17 @@
 
 # Projects
 /src/config.js
+/src/blogPostsData.json
+/src/pagesData.json
+
 /public/*
 /src/pages/*.js
 !/src/pages/_app.js
 !/src/pages/_document.js
 !/src/pages/404.js
-
-
+basePath.json
+/src/
 # production
-/build
 
 # misc
 .DS_Store
