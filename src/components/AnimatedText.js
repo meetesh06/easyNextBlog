@@ -52,13 +52,13 @@ const AnimatedCharacters = (props) => {
   });
 
   return (
-    <Typography variant="h4" component="h4" sx={{ textAlign: { xs: 'center', md: 'left' } }}>
+    <Typography variant="h4" component="h4" sx={{ textAlign: { xs: 'center', md: 'left', overflow: 'hidden' } }}>
       {words.map((word, index) => {
         return (
           <div
             key={`word-${index}`}
             style={{
-              display: 'inline-block',
+              display: 'inline-block'
             }}
           >
             {words[index].flat().map((element, index) => {
