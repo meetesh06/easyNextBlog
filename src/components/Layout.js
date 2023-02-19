@@ -4,10 +4,10 @@ import Head from 'next/head'
 
 import DisplayCard from './DisplayCard'
 import NavBar from './NavBar'
-import { Box, CssBaseline, Grid, responsiveFontSizes, ScopedCssBaseline, ThemeProvider } from '@mui/material';
+import { Box, createTheme, CssBaseline, Grid, responsiveFontSizes, ScopedCssBaseline, ThemeProvider } from '@mui/material';
 import BlogNavigation from './BlogNavigation';
 
-import { dark, light } from '@/config';
+import { lightTheme, darkTheme } from '@/config';
 
 import { motion } from 'framer-motion';
 
@@ -94,6 +94,15 @@ function Layout(props) {
     if (currMode !== localTheme) 
       dispatch(toggleMode(localTheme));
   }, [])
+
+  const light = createTheme({
+    ...lightTheme
+  });
+  
+  const dark = createTheme({
+    ...darkTheme
+  });
+
   let theme = currMode === "light" ? light : dark
 
   theme = responsiveFontSizes(theme);

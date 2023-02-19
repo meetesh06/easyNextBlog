@@ -12,7 +12,14 @@
 /.next/
 /out/
 
+# Projects
+/src/config.js
 /public/*
+/src/pages/*.js
+!/src/pages/_app.js
+!/src/pages/_document.js
+!/src/pages/404.js
+
 
 # production
 /build
