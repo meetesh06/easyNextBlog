@@ -57,9 +57,8 @@ const Root = styled('div')((
       fontWeight: 'bold'
     },
     [`& .${classes.toggleButton}`]: {
-      marginLeft: theme.spacing(1),
+      // marginLeft: theme.spacing(1),
       color: theme.palette.mode === "light" ? "yellow" : "gray",
-      fontWeight: 'bold'
     },
     [`& .${classes.navlinkSelected}`]: {
       textDecoration: 'none',
@@ -105,7 +104,7 @@ function NavBar() {
         <Container maxWidth="xl">
           <Toolbar disableGutters>
 
-            <Box sx={{ position: 'relative', top: -5, display: { xs: 'inline-block', md: 'none' } }}>
+            <Box sx={{ display: { xs: 'inline-block', md: 'none' } }}>
               <IconButton
                 size="large"
                 aria-label="open menu"
@@ -186,19 +185,23 @@ function NavBar() {
                 </Link>
               })}
             </Box>
-            <IconButton 
-              aria-label="toggle darkmode"
-              className={classes.toggleButton}
-              onClick={() => { 
-                let toggleTo = currMode === "light" ? "dark" : "light";
-                localStorage.setItem('mode', toggleTo)
-                dispatch(toggleMode(toggleTo));
-              }} 
-            >
-              {
-                currMode === "light" ? <LightMode /> : <DarkMode />
-              }
-            </IconButton>
+            <Box>
+              <IconButton
+                size="large"
+                aria-label="toggle darkmode"
+                className={classes.toggleButton}
+                onClick={() => { 
+                  let toggleTo = currMode === "light" ? "dark" : "light";
+                  localStorage.setItem('mode', toggleTo)
+                  dispatch(toggleMode(toggleTo));
+                }} 
+                color="inherit"
+              >
+                {
+                  currMode === "light" ? <LightMode /> : <DarkMode />
+                }
+              </IconButton>
+            </Box>
           </Toolbar>
         </Container>
       </AppBar>

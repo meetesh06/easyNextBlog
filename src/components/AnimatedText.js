@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Typography } from "@mui/material";
+import Box from '@mui/material/Box';
 
 // Word wrapper
 const Wrapper = (props) => {
@@ -45,55 +46,67 @@ const AnimatedCharacters = (props) => {
   }
 
   // Add a space ("\u00A0") to the end of each word
-  words.map((word) => {
+  words.map((word, index) => {
+    if (words.length - 1 != index)
     return word.push("\u00A0");
   });
 
   return (
-    <Typography variant="h4" component="h4">
+    <Typography variant="h4" component="h4" sx={{ textAlign: { xs: 'center', md: 'left' } }}>
       {words.map((word, index) => {
         return (
-          // Wrap each word in the Wrapper component
-          <Wrapper key={index}>
+          <div
+            key={`word-${index}`}
+            style={{
+              display: 'inline-block',
+            }}
+          >
             {words[index].flat().map((element, index) => {
               return (
                 <span
-                style={{
-                  overflow: "hidden",
-                  display: "inline-block",
-                  position: 'relative',
-                  top: 5
-                }}
-                key={index}
-              >
+                  key={`navbar-word-${index}`}
+                >
                   <motion.span
-                    style={{ display: "inline-block" }}
+                    style={{ display: "inline-block", fontWeight: 'bold' }}
                     variants={item}
                   >
                     {element}
                   </motion.span>
-
-              </span>
+                </span>
               );
             })}
-          </Wrapper>
+          </div>
         );
       })}
-      <motion.div
-        // style={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ 
-          type: 'spring',
-          repeat: Infinity, 
-          repeatType: 'reverse',
-          duration: 0.7, 
-          ease: [0.455, 0.03, 0.515, 0.955], duration: 0.85
+
+      <div
+        key={`word-end`}
+        style={{
+          display: 'inline-block',
         }}
+      >
+        <motion.div
+          animate={{ 
+            backgroundColor: ["#a9b6c4", "#c3ddf7", "#fff"] 
+          }}
+          transition={{ 
+            easings: ["easeIn", "easeOut"],
+            repeat: Infinity, 
+            repeatType: 'reverse',
+            duration: 3, 
+          }}
      
-        // variants={cursor} 
-        // transition={{repeat: Infinity, duration: 2, repeatType: 'reverse'}} 
-        style={{ opacity: 0.3, width: 2, height: 35, backgroundColor: 'white', display: 'inline-block' }}></motion.div>
-      {/* {} */}
+          style={{ 
+            marginLeft: 3,
+            opacity: 1,
+            width: 7, 
+            height: 7,
+            borderRadius: 7,
+            backgroundColor: 'white',
+            display: 'inline-block'
+          }} 
+        />
+      </div>
     </Typography>
   );
 };
