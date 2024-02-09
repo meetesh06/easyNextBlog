@@ -39,6 +39,7 @@ const classes = {
   navLink: `${PREFIX}-navlink`,
   navlinkSelected: `${PREFIX}-navlinkSelected`,
   toggleButton: `${PREFIX}-toggleButton`,
+  mobileNavBack: `${PREFIX}-mobileNavBack`,
 };
 
 const Root = styled('div')((
@@ -59,6 +60,9 @@ const Root = styled('div')((
     [`& .${classes.toggleButton}`]: {
       // marginLeft: theme.spacing(1),
       color: theme.palette.mode === "light" ? "yellow" : "gray",
+    },
+    [`& .${classes.mobileNavBack}`]: {
+      color: "black",
     },
     [`& .${classes.navlinkSelected}`]: {
       textDecoration: 'none',
@@ -127,21 +131,24 @@ function NavBar() {
                 }}
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: 'block', md: 'none' },
-                }}
+                
+                // sx={{
+                //   display: { xs: 'block', md: 'none', backgroundColor: theme.palette.primary.main },
+                // }}
               >
                 {pagesData.pages.map((page) => (
                   <Link
-                  key={`nav-${page[1]}`}
+                    
+                    key={`nav-${page[1]}`}
                     href={page[1]}
                     >
                     <MenuItem
+                      
                       component="a"
                       disabled={page[2]}
                       onClick={handleCloseNavMenu}
                     >
-                      <Typography textAlign="center">{page[0]}</Typography>
+                      <Typography variant='button' color="ButtonText" textAlign="center">{page[0]}</Typography>
                     </MenuItem>
                   </Link>
                 ))}

@@ -94,7 +94,7 @@ export default function PostsYearly(props) {
   
 
   const handleToggle = (event, nodeIds) => {
-    console.log(nodeIds)
+    // console.log(nodeIds)
     setExpanded(nodeIds);
   };
 
