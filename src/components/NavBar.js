@@ -16,7 +16,7 @@ import {
     motion
 } from 'framer-motion';
 
-import AnimatedText from '@/components/AnimatedText'
+// import AnimatedText from '@/components/AnimatedText'
 import Link from 'next/link'
 
 import {
@@ -159,7 +159,9 @@ function NavBar() {
               variants={container}
             >
               <div className="container">
-                <AnimatedText type="heading1" text={SITENAME} />
+              <Typography variant="h4" component="h4" sx={{ textAlign: { xs: 'center', md: 'left', overflow: 'hidden', fontFamily: 'monospace', fontWeight: 'bold' } }}>
+                {SITENAME}
+              </Typography>
               </div>
             </motion.div>
 

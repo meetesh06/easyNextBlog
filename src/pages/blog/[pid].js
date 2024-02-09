@@ -40,6 +40,7 @@ const classes = {
   heading: `${PREFIX}-heading`,
   divider: `${PREFIX}-divider`,
   categoryName: `${PREFIX}-categoryName`,
+  created: `${PREFIX}-created`,
   dateHolder: `${PREFIX}-dateHolder`,
   markdownImage: `${PREFIX}-markdownImage`,
   markdownContainer: `${PREFIX}-markdownContainer`,
@@ -67,6 +68,7 @@ const Root = styled('div')((
     marginRight: theme.spacing(10),
     marginBottom: theme.spacing(2),
     padding: theme.spacing(6),
+    backgroundColor: theme.palette.background.paper,
     minHeight: '50vh',
     fontFamily: 'Roboto',
     "& a": {
@@ -81,8 +83,8 @@ const Root = styled('div')((
   },
 
   [`& .${classes.heading}`]: {
-    fontSize: theme.typography.pxToRem(40),
-    fontWeight: theme.typography.fontWeightBold
+    color: theme.palette.primary.main,
+    fontWeight: theme.typography.fontWeightBold,
   },
 
   [`& .${classes.divider}`]: {
@@ -91,7 +93,12 @@ const Root = styled('div')((
   },
 
   [`& .${classes.categoryName}`]: {
+    color: theme.palette.primary.main,
     marginRight: theme.spacing(1),
+  },
+
+  [`& .${classes.created}`]: {
+    color: theme.palette.text.secondary,
   },
 
   [`& .${classes.dateHolder}`]: {
@@ -109,6 +116,9 @@ const Root = styled('div')((
   },
 
   [`& .${classes.md_p}`]: {
+    padding: 20,
+    borderRadius: 10,
+    backgroundColor: theme.palette.mode === "light" ? "rgba(0,0,0,0.05)" : "rgba(255,255,255,0.1)",
     fontSize: theme.typography.pxToRem(20),
     color: theme.palette.text.secondary,
     lineHeight: 1.7
@@ -116,11 +126,13 @@ const Root = styled('div')((
 
   [`& .${classes.md_h1}`]: {
     color: theme.palette.text.secondary,
+    fontWeight: theme.typography.fontWeightBold,
     lineHeight: 1.7
   },
 
   [`& .${classes.md_h2}`]: {
-    color: theme.palette.text.secondary,
+    color: theme.palette.primary.main,
+    fontWeight: theme.typography.fontWeightBold,
     lineHeight: 1.7
   },
 
@@ -206,13 +218,14 @@ function PostContainer({ title, category, created, postText, description, lineag
             className={classes.paper} elevation={currMode === "light" ? 5 : 3}>
             <div>
               <Typography
+                className={classes.heading}
                 variant="h2"
                 component="h1">
                 {title}
               </Typography>
               <span className={classes.dateHolder}>
                 <Chip className={classes.categoryName} label={category} />
-                <Typography variant="body2" >
+                <Typography variant="body2" className={classes.created}>
                   created on {created}
                 </Typography>
               </span>

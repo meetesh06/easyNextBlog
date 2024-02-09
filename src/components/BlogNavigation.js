@@ -108,7 +108,7 @@ export default function PostsYearly(props) {
       defaultCollapseIcon={<MinusSquare />}
       defaultExpandIcon={<PlusSquare />}
       defaultEndIcon={<CloseSquare />}
-      sx={(theme) => { return { marginBottom: theme.spacing(2), padding: theme.spacing(1), minHeight: 100, flexGrow: 1, maxWidth: '100%', overflowY: 'auto' }}}
+      sx={(theme) => { return { color: theme.palette.primary.main, marginBottom: theme.spacing(2), padding: theme.spacing(1), minHeight: 100, flexGrow: 1, maxWidth: '100%', overflowY: 'auto' }}}
       expanded={expanded}
       selected={selected}
       onNodeToggle={handleToggle}
