@@ -11,7 +11,7 @@ export default class MyDocument extends Document {
      <Html lang="en">
        <Head>
         {
-          GTAG_ADDR && <Script async src={GTAG_ADDR} />
+          GTAG_ADDR && <script async src={GTAG_ADDR} />
         }
         {
           GTAG_ADDR &&
