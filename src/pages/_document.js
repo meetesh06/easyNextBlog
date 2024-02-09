@@ -11,14 +11,17 @@ export default class MyDocument extends Document {
      <Html lang="en">
        <Head>
         {
-          GTAG_ADDR && <Script async src={GTAG_ADDR} />
+          GTAG_ADDR && <script async src={GTAG_ADDR}></script>
         }
+
         {
-          GTAG_SCRIPT && 
-            <Script id="google-tag-manager" strategy="afterInteractive">
-              {GTAG_SCRIPT}
-            </Script>
+          GTAG_SCRIPT &&
+          <script>
+            {GTAG_SCRIPT}
+          </script>
         }
+        
+
         {this.props.emotionStyleTags}
        </Head>
        <body>
