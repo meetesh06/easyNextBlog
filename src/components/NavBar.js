@@ -25,12 +25,10 @@ import {
 
 import pagesData from "@/pagesData.json";
 import styled from '@emotion/styled';
-import { ToggleButton } from '@mui/material';
-import { DarkMode, FormatBold, LightMode } from '@mui/icons-material';
+import { DarkMode, LightMode } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getMode, toggleMode } from '@/store/darkModeSlice';
-import LinkMui from '@mui/material/Link';
 
 const PREFIX = 'NavBar';
 

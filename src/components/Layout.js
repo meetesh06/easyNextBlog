@@ -91,8 +91,9 @@ function Layout(props) {
 
   useEffect(() => {
     let localTheme = localStorage.getItem('mode')
-    if (currMode !== localTheme) 
+    if (localTheme !== null) {
       dispatch(toggleMode(localTheme));
+    }
   }, [])
 
   const light = createTheme({
@@ -103,7 +104,7 @@ function Layout(props) {
     ...darkTheme
   });
 
-  let theme = currMode === "light" ? light : dark
+  let theme = currMode === "dark" ? dark : light
 
   theme = responsiveFontSizes(theme);
 
