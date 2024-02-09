@@ -3,7 +3,7 @@ import Document, { Html, Head, Main, NextScript } from "next/document";
 import createEmotionServer from "@emotion/server/create-instance";
 import createEmotionCache from "../utils/createEmotionCache";
 import Script from "next/script";
-import { GTAG_ADDR, GTAG_SCRIPT } from "@/config";
+import { GTAG_ADDR } from "@/config";
 
 export default class MyDocument extends Document {
  render() {
@@ -11,17 +11,13 @@ export default class MyDocument extends Document {
      <Html lang="en">
        <Head>
         {
-          GTAG_ADDR && <script async src={GTAG_ADDR}></script>
+          GTAG_ADDR && <Script async src={GTAG_ADDR} />
         }
-
         {
-          GTAG_SCRIPT &&
-          <script>
-            {GTAG_SCRIPT}
-          </script>
-        }
-        
+          GTAG_ADDR &&
+          <script id="google-tag-manager" strategy="afterInteractive" type="text/javascript" src="/google_tag_script.js"></script>
 
+        }
         {this.props.emotionStyleTags}
        </Head>
        <body>
