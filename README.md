@@ -1,27 +1,27 @@
 # A simple blog manager + site for users
 
-> Update, now i'm using NextJS allow for better SEO and load times, still a lot of simplification is left but it works much better.
+This is a design template that is meant to be used in conjunction with a few scripts (I need to work to make the documentation clearer) that take information and generate pages. I used Next.JS to generate a static HTML website that can be hosted anywhere.
 
 Take a look at the demo at: [my homepage](https://meetesh06.github.io)
 
-The content for the first page can be adjusted by changing **src/config.js**
+It provides the following functionality
 
-The blog posts are written in markdown format and are contained inside **public/posts** directory.
-The markdown files must have the following headers to be recognized.
+- Customizable grid layout.
+- Generates simple Static HTML files, easy to host on Github.
+- Smart blog navigation (all generated for offline use): The posts are simple markdown files that make it easy to write and maintain.
+- Light/Dark mode support, the page uses localstorage to remember the user preference.
+- That's it, simple, elegant sites for regular use :)
 
-```
-<!-- Title -->
-<!-- Category -->
-<!-- Lineage -->
-<!-- Tagline -->
-<!-- Date of Creation: (DD/MM/YY) -->
+![(desktop) Google pagespeed insights report for https://meetesh06.github.io from Feb 10, 2024, 6:18:07 PM](./extras/seo1.png "Google pagespeed insights for https://meetesh06.github.io (desktop)")
 
-... post content​
-```
+![(mobile) Google pagespeed insights report for https://meetesh06.github.io from Feb 10, 2024, 6:18:07 PM](./extras/seo2.png "Google pagespeed insights for https://meetesh06.github.io (mobile)")
 
-Demo for the legacy branch: 
-[demo](https://meetesh06.github.io/Blog)
+## How does it work?
+
+*TODO: This section is currently incomplete*
+
+This template is meant to be used with a bunch of different accomplying scripts, I still need to document them and release them. 
+
 
 ## TODO
-- Blog page needs some navigation for categories, lineages
 - Bring back encrypted secret posts
