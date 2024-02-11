@@ -55,7 +55,7 @@ const Root = styled('div')((
   [`& .${classes.cardTitle}`]: { 
     color: theme.palette.mode === "light" ? theme.palette.primary.main : undefined,
     fontWeight: 'bold',
-    fontFamily: 'mono',
+    fontFamily: 'monospace',
     fontSize: "1.3rem",
   },
 
@@ -66,7 +66,7 @@ const Root = styled('div')((
   [`& .${classes.cardText}`]: { 
     color: theme.palette.text.secondary,
     marginBottom: 0,
-    fontFamily: 'mono',
+    fontFamily: 'monospace',
     fontWeight: 'bold',
     fontSize: "0.85rem",
     backgroundColor: theme.palette.mode === "light" ? "rgba(0,0,0,0.1)" : "rgba(255,255,255,0.1)",
